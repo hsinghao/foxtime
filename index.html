@@ -1,46 +1,63 @@
 <!DOCTYPE html>
+<!-- saved from url=(0035)https://hsinghao.github.io/foxtime/ -->
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>狐狸的家</title>
-  </head>
-  <body>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>狐狸的家</title>
+</head>
+
+<body
+  style="cursor: url(&quot;chrome-extension://jlgkpaicikihijadgifklkbpdajbkhjo/image/cursors/002.png&quot;), default;">
 
 
-    <h1>狐狸的家公會戰截止時間計算器</h1>
-    <img src="title.jpg" alt="狐狸的家公會戰" style="max-width:100%;height:auto;">
-    <h2 style="color:blue">  現在時間  <span id="showTime">--:--:--</span></h2>
-    <p> &#127312; 我方佔領分數 : +<input type="number" id="myScore" value=""> </p>
-<!--    <p> 敵方佔領分數 : +<input type="number" id="enemyScore" value="0"> </p>  -->
-    <p> &#127313; 累積分數 : <input type="number" id="totalScore" value=""> </p>
-    <p> &#127314; 速戰速決分數 : <input type="number" id="finalScore" value=""> </p>
-    <button type="button" onclick="myFunction()">計算結束時間</button>
-    <h2 id="demo" style="color:red">結束時間 --:--:--</h2>
-    
-    <a href="https://www.hitwebcounter.com" target="_blank">
-    <img src="https://hitwebcounter.com/counter/counter.php?page=7288334&style=0001&nbdigits=5&type=page&initCount=0" title="User Stats" Alt="PHP Hits Count"   border="0" >
-    </a>             
-    
-    <script>
+  <h1>狐狸的家公會戰截止時間計算器</h1>
+  <img src="./狐狸的家_files/title.jpg" alt="狐狸的家公會戰" style="max-width:100%;height:auto;">
+  <h2 style="color:blue"> 現在時間 <span id="showTime">--:--:--</span></h2>
+  <p> 🅐 我方佔領分數 : +<input type="number" id="myScore" value="" control-id="ControlID-1" style="width: 50px"> </p>
+  <!--    <p> 敵方佔領分數 : +<input type="number" id="enemyScore" value="0"> </p>  -->
+  <p> 🅑 累積分數 : <input type="number" id="totalScore" value="" control-id="ControlID-2" style="width: 70px"> </p>
+  <p> 🅒 速戰速決分數 : <input type="number" id="finalScore" value="" control-id="ControlID-3" style="width: 70px"> </p>
+  <p> 🅓 剩餘時間 : <input type="number" id="remainHour" value="" control-id="ControlID-4" style="width: 50px">時 <input
+      type="number" id="remainMin" value="" control-id="ControlID-5" style="width: 50px">分</p>
+  <!-- <p> 🅓 剩餘時間 : <input type="time" id="endTime" name="endT"></p> -->
+
+  <button type="button" onclick="myFunction()" control-id="ControlID-6">計算結束時間</button>
+  <h2 id="demo" style="color:red">結束時間 --:--:--</h2>
+
+  <a href="https://www.hitwebcounter.com/" target="_blank">
+    <img src="./狐狸的家_files/counter.php" title="User Stats" alt="PHP Hits Count" border="0" hs5wv966u="">
+  </a>
+
+  <script>
     function myFunction() {
-    var nowTime = new Date();
-    // var time = today.getHours() + ":" + (today.getMinutes() >9 ? today.getMinutes() : '0'+today.getMinutes());
-    var showTime = nowTime.toLocaleTimeString();
-    document.getElementById("showTime").innerHTML = showTime;
-    var getMyScore = document.getElementById("myScore").value;
-//    var getEnemyScore = document.getElementById("enemyScore").value;
-    var getTotalScore = document.getElementById("totalScore").value;
-    var getFinalScore = document.getElementById("finalScore").value;
-//    var scoreDiff = Math.abs(getMyScore,getEnemyScore);
-    var goalScore = getFinalScore - getTotalScore;
-    var requireMinute = Math.ceil(goalScore / getMyScore);
-  //  var closeTime = time + (requireMinute * 60000);
-    var closeTime = new Date();
-    closeTime.setMinutes(nowTime.getMinutes()+requireMinute);
-    document.getElementById("demo").innerHTML =  "結束時間 " + closeTime.toLocaleTimeString();
+      var nowTime = new Date();
+      // var time = today.getHours() + ":" + (today.getMinutes() >9 ? today.getMinutes() : '0'+today.getMinutes());
+      var showTime = nowTime.toLocaleTimeString();
+      document.getElementById("showTime").innerHTML = showTime;
+      var getMyScore = document.getElementById("myScore").value;
+      //    var getEnemyScore = document.getElementById("enemyScore").value;
+      var getTotalScore = document.getElementById("totalScore").value;
+      var getFinalScore = document.getElementById("finalScore").value;
+      //    var scoreDiff = Math.abs(getMyScore,getEnemyScore);
+      var goalScore = getFinalScore - getTotalScore;
+      var requireMinute = Math.ceil(goalScore / getMyScore);
+      //  var closeTime = time + (requireMinute * 60000);remainMinute
+      var getRemainHour = document.getElementById("remainHour").value;
+      var getRemainMin = document.getElementById("remainMin").value;
+      var remainMinute = Number(getRemainHour * 60) + Number(getRemainMin);
+      var closeTime = new Date();
+
+      if (remainMinute > requireMinute) {
+        closeTime.setMinutes(nowTime.getMinutes() + requireMinute);  //速戰速決的時間
+        document.getElementById("demo").innerHTML = "結束時間(提前) " + closeTime.toLocaleTimeString();
+      } else {
+        closeTime.setMinutes(nowTime.getMinutes() + remainMinute);  //最晚時間
+        document.getElementById("demo").innerHTML = "結束時間(正常)" + closeTime.toLocaleTimeString();
+      }
     }
-    </script>
+  </script>
+</body>
 
-
-  </body>
 </html>
